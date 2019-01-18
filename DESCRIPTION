@@ -1,0 +1,17 @@
+Package: fml
+Title: File Management Locator
+Version: 0.0.1
+Authors@R: c(
+    person("Michael W.", "Kearney", ,
+    email = "kearneymw@missouri.edu", role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0002-0730-4694"))
+    )
+Description: Easily locate files on your local machine.
+License: MIT + file LICENSE
+URL: https://github.com/mkearney/fml
+BugReports: https://github.com/mkearney/fml/issues
+Encoding: UTF-8
+LazyData: yes
+RoxygenNote: 6.1.1
+Imports: 
+    tfse
