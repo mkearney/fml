@@ -1,3 +1,31 @@
+#' Find file
+#'
+#' Looks for file in common spots and returns full path
+#'
+#' @param ... Name of file (can include containing directory to narrow search)
+#' @return Path if found. NULL if not.
+#' @export
+find_file <- function(...) {
+  UseMethod("find_file")
+}
+
+#' @export
+find_file.default <- function(...) {
+  ## capture file
+  file <- file_path(...)
+
+  ## get dir list
+  dirs <- good_dirs()
+
+  ## look for file
+  for (i in dirs) {
+    path <- fpf(i)(file)
+    if (length(path) > 0) break
+  }
+
+  ## return (NULL if not found)
+  path
+}
 
 rdir <- function() {
   if (!identical("", Sys.getenv("FML_R_DIR"))) {
@@ -8,33 +36,10 @@ rdir <- function() {
   r
 }
 
-#' List directories
-#'
-#' Returns names of directories located in a given directory. It's similar to
-#' list.dirs() only with better defaults and behavior.
-#'
-#' @param path Directory from which to locate dirs, defaults to current working
-#'   directory.
-#' @param fulle.names Logical indicating whether to return full paths. Defaults
-#'   to TRUE.
-#' @param all.names Logical indicating whether to return all (include dot files)
-#'   dir names. Defaults to FALSE.
-#' @return A character vector of directories
-#' @export
-list_dirs <- function(path = ".", full.names = TRUE, all.names = FALSE) {
-  UseMethod("list_dirs")
-}
-
-#' @export
-list_dirs.default <- function(path = ".", full.names = TRUE, all.names = FALSE) {
-  dirs <- list.dirs(path, recursive = FALSE, full.names = full.names)
-  if (!all.names) {
-    dirs <- grep("\\.[^/]+$", dirs, invert = TRUE, value = TRUE)
-  }
-  if (full.names) {
-    dirs <- normalizePath(dirs)
-  }
-  dirs
+auth_paths <- function(...) {
+  paths <- file_path(...)
+  paths <- file_info(paths)
+  paths$path[paths$write & paths$read]
 }
 
 good_dirs <- function() {
@@ -42,13 +47,13 @@ good_dirs <- function() {
   wd <- getwd()
 
   ## (2) plus one
-  w1 <- list_dirs()
+  w1 <- auth_paths(list_dirs())
 
   ## (3) plus two
   w2 <- unlist(lapply(w1, list_dirs))
 
   ## (3) minus one
-  w0 <- normalizePath("..")
+  w0 <- auth_paths(normalizePath(".."))
 
   ## (4) - (11)
   fd <- fml_dirs()
@@ -73,17 +78,17 @@ fml_dirs <- function() {
   hm <- tfse::home()
 
   ## home directory + 1
-  h1 <- grep("\\bLibrary\\b", list_dirs(hm),
+  h1 <- grep("\\bLibrary\\b", auth_paths(list_dirs(hm)),
     value = TRUE, invert = TRUE)
 
   ## home directory + 2
-  h2 <- unlist(lapply(h1, list_dirs))
+  h2 <- auth_paths(unlist(lapply(h1, list_dirs)))
 
   ## home directory + 3
-  h3 <- unlist(lapply(h2, list_dirs))
+  h3 <- auth_paths(unlist(lapply(h2, list_dirs)))
 
   ## home directory + 4
-  h4 <- unlist(lapply(h3, list_dirs))
+  h4 <- auth_paths(unlist(lapply(h3, list_dirs)))
 
   ## combine and filter dups
   d <- unique(c(rd, hm, h1, h2, h3, h4))
@@ -98,78 +103,6 @@ fml_dirs <- function() {
   d
 }
 
-
-#' File exists
-#'
-#' Logical test of whether file exists
-#'
-#' @param ... Enter parts to file path.
-#' @return Logical value
-#' @export
-file_exists <- function(...) {
-  file.exists(file_path(...))
-}
-
-
 fpf <- function(d) function(path) {
   if (file_exists(d, path)) return(file_path(d, path)) else NULL
-}
-
-
-#' File path
-#'
-#' Builds a file path
-#'
-#' @param ... Names to path
-#' @return String of path name
-#' @export
-file_path <- function(...) file.path(...)
-
-#' Directory name
-#'
-#' Returns directory name from a given path
-#'
-#' @param path String representing path
-#' @return Name of containing
-#' @export
-dir_name <- function(path) dirname(path)
-
-#' File name
-#'
-#' Returns file name from a given path
-#'
-#' @param path String representing path
-#' @return Name of file
-#' @export
-file_name <- function(path) basename(path)
-
-#' Find file
-#'
-#' Looks for file in common spots and returns full path
-#'
-#' @param ... Name of file (can include containing directory to narrow search)
-#' @return Path if found. NULL if not.
-#' @export
-find_file <- function(...) {
-
-  UseMethod("find_file")
-}
-
-#' @export
-find_file.default <- function(...) {
-
-  ## capture file
-  file <- file_path(...)
-
-  ## get dir list
-  dirs <- good_dirs()
-
-  ## look for file
-  for (i in dirs) {
-    path <- fpf(i)(file)
-    if (length(path) > 0) break
-  }
-
-  ## return (NULL if not found)
-  path
 }
