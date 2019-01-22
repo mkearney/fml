@@ -53,7 +53,7 @@ list_files.default <- function(path = ".",
       invert = invert, value = TRUE)
   }
   if (full) {
-    files <- normalizePath(file_path(path, files), mustWork = FALSE)
+    files <- normalizePath(fp(path, files), mustWork = FALSE)
   }
   files
 }

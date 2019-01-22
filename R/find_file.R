@@ -12,7 +12,7 @@ find_file <- function(...) {
 #' @export
 find_file.default <- function(...) {
   ## capture file
-  file <- file_path(...)
+  file <- fp(...)
 
   ## get dir list
   dirs <- good_dirs()
@@ -37,7 +37,7 @@ rdir <- function() {
 }
 
 auth_paths <- function(...) {
-  paths <- file_path(...)
+  paths <- fp(...)
   paths <- file_info(paths)
   paths$path[paths$write & paths$read]
 }
@@ -94,15 +94,15 @@ fml_dirs <- function() {
   d <- unique(c(rd, hm, h1, h2, h3, h4))
 
   ## save as .rds
-  tfse::save_RDS(d, file_path("~", ".fml_dirs"))
+  tfse::save_RDS(d, fp("~", ".fml_dirs"))
 
   ## set path to .rds file as Renviron var
-  tfse::set_renv(FML_DIR_PAT = normalizePath(file_path("~", ".fml_dirs")))
+  tfse::set_renv(FML_DIR_PAT = fp("~", ".fml_dirs"))
 
   ## return dirs
   d
 }
 
 fpf <- function(d) function(path) {
-  if (file_exists(d, path)) return(file_path(d, path)) else NULL
+  if (file_exists(d, path)) return(fp(d, path)) else NULL
 }

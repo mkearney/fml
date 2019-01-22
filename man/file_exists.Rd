@@ -4,13 +4,13 @@
 \alias{file_exists}
 \title{File exists}
 \usage{
-file_exists(...)
+file_exists(path)
 }
 \arguments{
-\item{...}{Enter parts to file path.}
+\item{path}{Path}
 }
 \value{
-Logical value
+Logical value with TRUE indicating it exists
 }
 \description{
 Logical test of whether file exists

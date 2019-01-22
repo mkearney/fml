@@ -4,13 +4,13 @@
 \alias{dir_exists}
 \title{Directory exists}
 \usage{
-dir_exists(...)
+dir_exists(path)
 }
 \arguments{
-\item{...}{Enter parts to dir path.}
+\item{path}{Path}
 }
 \value{
-Logical value
+Logical value with TRUE indicating it exists
 }
 \description{
 Logical test of whether directory exists

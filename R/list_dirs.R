@@ -50,7 +50,7 @@ list_dirs.default <- function(path = ".",
       ignore.case = ignore.case)
   }
   if (full) {
-    dirs <- normalizePath(file_path(path, dirs), mustWork = FALSE)
+    dirs <- normalizePath(fp(path, dirs), mustWork = FALSE)
   }
   dirs
 }

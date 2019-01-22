@@ -2,49 +2,52 @@
 #'
 #' Logical test of whether file exists
 #'
-#' @param ... Enter parts to file path.
-#' @return Logical value
+#' @param path Path
+#' @return Logical value with TRUE indicating it exists
 #' @export
-file_exists <- function(...) {
-  file.exists(file_path(...))
+file_exists <- function(path) {
+  file.exists(path)
 }
-
 
 #' Directory exists
 #'
 #' Logical test of whether directory exists
 #'
-#' @param ... Enter parts to dir path.
-#' @return Logical value
+#' @param path Path
+#' @return Logical value with TRUE indicating it exists
 #' @export
-dir_exists <- function(...) {
-  dir.exists(file_path(...))
+dir_exists <- function(path) {
+  dir.exists(path)
 }
 
-
-#' File path
+#' Check for write access
 #'
-#' Builds a file path
-#'
-#' @param ... Names to path
-#' @return String of path name
+#' @param path Path
+#' @return Logical indicating wether write permission exists
 #' @export
-file_path <- function(...) file.path(...)
+write_access <- function(path) {
+  x <- ifelse(file_exists(path), path, dir_name(path))
+  i <- file.access(x, 2)
+  setNames(i == 0, path)
+}
 
-#' Directory name
+#' Check for read access
 #'
-#' Returns directory name from a given path
-#'
-#' @param path String representing path
-#' @return Name of containing
+#' @param path Path
+#' @return Logical indicating wether read permission exists
 #' @export
-dir_name <- function(path) dirname(path)
+read_access <- function(path) {
+  x <- ifelse(file_exists(path), path, dir_name(path))
+  i <- file.access(x, 4)
+  setNames(i == 0, path)
+}
 
-#' File name
+#' Symlink exists
 #'
-#' Returns file name from a given path
+#' Check whether a symlink exists
 #'
-#' @param path String representing path
-#' @return Name of file
+#' @rdname file_create
 #' @export
-file_name <- function(path) basename(path)
+symlink_exists <- function(path) {
+  isTRUE(nzchar(Sys.readlink(path), keepNA = TRUE))
+}
