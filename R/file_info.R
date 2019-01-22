@@ -14,12 +14,13 @@ file_info <- function(...) {
 
 #' @export
 file_info.default <- function(...) {
-  x <- file.info(..., extra_cols = FALSE)
+  x <- file.info(...)
   x$path <- row.names(x)
   row.names(x) <- NULL
-  x <- add_perms(x)
-  x[c("path", "size", "isdir", "execute", "read", "write",
-    "mtime", "ctime", "atime")]
+  if (is.data.frame(x)) {
+    class(x) <- c("tbl_data", "tbl_df", "tbl", "data.frame")
+  }
+  x[c("path", "size", "isdir", "mode", "mtime")]
 }
 
 
