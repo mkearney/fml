@@ -81,16 +81,34 @@ dir_remove <- function(path, recursive = FALSE) {
 #' @param from Name of directory to rename
 #' @param to New directory name
 #' @return Logical indicating whether success
+#' @rdname dir_create
 #' @export
 dir_rename <- function(from, to) {
-  if (!dir_exists(dir_name(to))) {
-    stop("Enclosing 'to' directory does not exist", call. = FALSE)
-  }
-  l <- file.copy(from, to, overwrite = FALSE, recursive = TRUE)
+  l <- dir_copy(from, to)
   if (l) {
     unlink(from, recursive = TRUE)
   }
   invisible(l)
+}
+
+#' Directory copy
+#'
+#' Copy directory
+#'
+#' @param from Name of directory to copy
+#' @param to New directory name
+#' @return Logical indicating whether success
+#' @rdname dir_create
+#' @export
+dir_copy <- function(from, to) {
+  stopifnot(
+    is.character(from) && is.character(to),
+    length(from) == 1L && length(to) == 1L
+  )
+  if (!dir_exists(dir_name(to))) {
+    stop("Enclosing 'to' directory does not exist", call. = FALSE)
+  }
+  file.copy(from, to, overwrite = FALSE, recursive = TRUE)
 }
 
 #' File rename
@@ -108,6 +126,8 @@ file_rename <- function(from, to) file.rename(from, to)
 #' copy file
 #'
 #' @inheritParams file_rename
+#' @param overwrite Logical indicating whether to overwrite
+#' @param recursive Logical indicating whether action should be recursive
 #' @rdname file_create
 #' @export
 file_copy <- function(from, to, overwrite = FALSE, recursive = FALSE) {

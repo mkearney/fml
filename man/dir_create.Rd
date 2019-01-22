@@ -3,11 +3,17 @@
 \name{dir_create}
 \alias{dir_create}
 \alias{dir_remove}
+\alias{dir_rename}
+\alias{dir_copy}
 \title{Create directory}
 \usage{
 dir_create(path, recursive = FALSE)
 
 dir_remove(path, recursive = FALSE)
+
+dir_rename(from, to)
+
+dir_copy(from, to)
 }
 \arguments{
 \item{path}{Path/name of directory to create}
@@ -15,11 +21,27 @@ dir_remove(path, recursive = FALSE)
 \item{recursive}{Logical indicating whether to recursively create new
 directory. This defaults to FALSE.}
 
+\item{from}{Name of directory to rename}
+
+\item{to}{New directory name}
+
 \item{recursive}{Logical indicating whether to recursively remove files.}
+
+\item{from}{Name of directory to copy}
+
+\item{to}{New directory name}
 }
 \value{
 Silently returns logical indicating success.
+
+Logical indicating whether success
+
+Logical indicating whether success
 }
 \description{
 Creates a directory
+
+Rename directory
+
+Copy directory
 }
