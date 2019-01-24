@@ -16,4 +16,5 @@ RoxygenNote: 6.1.1
 Imports: 
     tfse
 Suggests: 
-    testthat
+    testthat,
+    covr

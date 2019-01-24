@@ -39,4 +39,8 @@ Find a file
 ## find the rtweet readme
 fml::find_file("rtweet", "README.Rmd")
 #> [1] "/Users/mwk/R/rtweet/README.Rmd"
+
+## locate file in project
+fml::here("R", "fp.R")
+#> [1] "/Users/mwk/R/fml/R/fp.R"
 ```
