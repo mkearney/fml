@@ -141,6 +141,6 @@ pe(fp(".", "this", "that"))
 #> [1] "./this/that"
 
 ## pipe style
-"~" %FP% "this" %FP% "that" %FP% pe()
-#> [1] "~/this/that"
+pe("~" %FP% "this" %FP% "that")
+#> [1] "/Users/mwk/this/that"
 ```

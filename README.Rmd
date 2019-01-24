@@ -112,5 +112,5 @@ fp("this", "that")
 pe(fp(".", "this", "that"))
 
 ## pipe style
-"~" %FP% "this" %FP% "that" %FP% pe()
+pe("~" %FP% "this" %FP% "that")
 ```
