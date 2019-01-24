@@ -143,6 +143,6 @@ file_copy <- function(from, to, overwrite = FALSE, recursive = FALSE) {
 #'
 #' Create symlink to file
 #'
-#' @inheritParams file_create
+#' @inheritParams file_rename
 #' @export
-file_symlink <- function(path) file.symlink(path)
+file_symlink <- function(from, to) file.symlink(from, to)

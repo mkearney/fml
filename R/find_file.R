@@ -57,7 +57,7 @@ fml_dirs <- function() {
   d <- Sys.getenv("FML_DIR_PAT")
 
   ## if it exists, read and return the dir vector
-  if (!identical("", d)) {
+  if (!identical("", d) && file_exists(d)) {
     return(readRDS(d))
   }
 

@@ -4,10 +4,12 @@
 \alias{file_symlink}
 \title{File symlink}
 \usage{
-file_symlink(path)
+file_symlink(from, to)
 }
 \arguments{
-\item{path}{Path}
+\item{from}{File to rename/copy}
+
+\item{to}{New/copy name}
 }
 \description{
 Create symlink to file

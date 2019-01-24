@@ -39,6 +39,28 @@ test_that("files works", {
   expect_true(file_exists("uuuu"))
   expect_true(!file_exists("tttt"))
   file_remove("uuuu")
+
+  tmp <- file_tmp()
+  file_create(tmp)
+  expect_true(
+    file_exists(tmp)
+  )
+  file_copy(tmp, "asdfasdf")
+  expect_true(
+    file_exists("asdfasdf")
+  )
+  expect_true(
+    file_symlink(tmp, "ssss")
+  )
+  expect_true(
+    symlink_exists("ssss")
+  )
+  expect_true(
+    file_exists("asdfasdf")
+  )
+  file_remove(tmp)
+  file_remove("ssss")
+  file_remove("asdfasdf")
 })
 
 
@@ -59,6 +81,11 @@ test_that("dirs works", {
   expect_true(!dir_exists("tttt"))
   dir_remove("uuuu")
 
+  tmp <- dir_tmp()
+  expect_true(
+    dir_exists(tmp)
+  )
+  dir_remove(tmp)
 })
 
 
@@ -107,5 +134,19 @@ test_that("find_file works", {
 
   expect_true(
     !file_exists(".Renviron")
+  )
+})
+
+
+test_that("file_info works", {
+  d <- file_info(list_paths())
+  expect_true(
+    is.data.frame(d)
+  )
+  expect_named(
+    d
+  )
+  expect_true(
+    all(c("path", "size", "isdir", "mtime") %in% names(d))
   )
 })
