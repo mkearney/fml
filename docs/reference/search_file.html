@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expand path — path_expand • fml</title>
+<title>Search file — search_file • fml</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Expand path — path_expand" />
+<meta property="og:title" content="Search file — search_file" />
 
-<meta property="og:description" content="Expands path to canonical form for the platform" />
+<meta property="og:description" content="Searches for matching file names in common spots and returns full path" />
 
 <meta property="og:image" content="https://fml.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -103,35 +103,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expand path</h1>
+    <h1>Search file</h1>
     
-    <div class="hidden name"><code>path_expand.Rd</code></div>
+    <div class="hidden name"><code>search_file.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Expands path to canonical form for the platform</p>
+    <p>Searches for matching file names in common spots and returns full path</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>path_expand</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>)
-
-<span class='fu'>pe</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>)
-
-<span class='fu'>get_path</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>search_file</span>(<span class='no'>pat</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='fu'><a href='path_expand.html'>get_path</a></span>(<span class='st'>"."</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>Character vector of paths to normalize</p></td>
+      <th>pat</th>
+      <td><p>Name to match (can include containing directory to narrow search)</p></td>
+    </tr>
+    <tr>
+      <th>dir</th>
+      <td><p>Optional, directory from which to start/limit search (only
+subfolders will be searched)</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Full/expanded canonical paths</p>
+    <p>Path if found. NULL if not.</p>
     
 
   </div>

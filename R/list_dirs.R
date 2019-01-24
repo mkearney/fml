@@ -42,16 +42,16 @@ list_dirs.default <- function(path = ".",
                               ignore.case = FALSE,
                               invert = FALSE) {
   dirs <- list.dirs(path, recursive = recursive, full.names = FALSE)
+  dirs <- dirs[dirs != ""]
   if (!all) {
-    dirs <- grep("^\\.[^/]+$", dirs, invert = TRUE, value = TRUE)
+    dirs <- grep("^\\.|/\\.", dirs, invert = TRUE, value = TRUE)
   }
   if (!is.null(pattern)) {
     dirs <- grep(pattern, dirs, invert = invert, value = TRUE,
       ignore.case = ignore.case)
   }
   if (full) {
-    path <- path_expand(path)
-    dirs <- normalizePath(fp(path, dirs), mustWork = FALSE)
+    dirs <- path_expand(fp(path, dirs))
   }
   dirs
 }

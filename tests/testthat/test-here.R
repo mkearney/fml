@@ -150,3 +150,29 @@ test_that("file_info works", {
     all(c("path", "size", "isdir", "mtime") %in% names(d))
   )
 })
+
+
+test_that("search_file works", {
+  expect_true(
+    length(search_file("DESCRIPTION")) == 0
+  )
+  tmp <- dir_tmp()
+  dir_create(fp(tmp, "this/that/the/other"), recursive = TRUE)
+  on.exit(dir_remove(tmp), add = TRUE)
+  file_create(fp(tmp, "this", "DESCRIPTION"))
+  expect_true(
+    length(search_file("DESCRIPTION", dir = tmp)) == 1
+  )
+  file_create(fp(tmp, "this/that", "DESCRIPTION"))
+  expect_true(
+    length(search_file("DESCRIPTION", dir = tmp)) == 2
+  )
+  file_create(fp(tmp, "this/that/the", "DESCRIPTION"))
+  expect_true(
+    length(search_file("DESCRIPTION", dir = tmp)) == 3
+  )
+  file_create(fp(tmp, "this/that/the/other", "DESCRIPTION"))
+  expect_true(
+    length(search_file("DESCRIPTION", dir = tmp)) == 4
+  )
+})

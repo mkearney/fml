@@ -30,17 +30,43 @@ if (!requireNamespace("remotes", quietly = TRUE)) {
 remotes::install_github("mkearney/fml")
 ```
 
-## Use
+## Find or search for files
 
-  - **`find_file()`**: find a file
+  - **`find_file()`**: find a file (exact matches)
 
 <!-- end list -->
 
 ``` r
 ## find the rtweet readme
-fml::find_file("rtweet", "README.Rmd")
-#> [1] "/Users/kearneymw/R/rtweet/README.Rmd"
+find_file("rtweet", "README.Rmd")
+#> [1] "/Users/mwk/R/rtweet/README.Rmd"
 ```
+
+  - **`search_file()`**: search for files using [wildcard
+    expansion](http://pubs.opengroup.org/onlinepubs/9699919799/functions/glob.html)
+      - **`*`**: match zero or more characters
+      - **`?`**: match a single character
+      - **`[`**: begin a character class or range
+
+<!-- end list -->
+
+``` r
+## all caps files that don't end in 'md' (.Rmd/.md)
+search_file("[A-Z]*[!md]")
+#> [1] "/Users/mwk/R/fml/docs/CNAME"            
+#> [2] "/Users/mwk/R/fml/docs/LICENSE-text.html"
+#> [3] "/Users/mwk/R/fml/docs/LICENSE.html"
+
+## all .yml files
+Sys.glob("*.yml")
+#> [1] "_pkgdown.yml" "codecov.yml"
+
+## .yml files that start with a dot
+Sys.glob(".*.yml")
+#> [1] ".travis.yml"
+```
+
+## Files in projects
 
   - **`here()`**: smart file paths within project
 
@@ -48,59 +74,73 @@ fml::find_file("rtweet", "README.Rmd")
 
 ``` r
 ## locate file in project
-fml::here("R", "fp.R")
-#> [1] "/Users/kearneymw/R/fml/R/fp.R"
+here("R", "fp.R")
+#> [1] "/Users/mwk/R/fml/R/fp.R"
 ```
 
-  - **`list_files()`**: list onlyl **files** in a given directory
+## List files/directories
+
+  - **`list_files()`**: list **files**
 
 <!-- end list -->
 
 ``` r
 ## list files in directory
-fml::list_files()
-#> [1] "/Users/kearneymw/R/fml/_pkgdown.yml"
-#> [2] "/Users/kearneymw/R/fml/codecov.yml" 
-#> [3] "/Users/kearneymw/R/fml/DESCRIPTION" 
-#> [4] "/Users/kearneymw/R/fml/fml.Rproj"   
-#> [5] "/Users/kearneymw/R/fml/LICENSE"     
-#> [6] "/Users/kearneymw/R/fml/LICENSE.md"  
-#> [7] "/Users/kearneymw/R/fml/NAMESPACE"   
-#> [8] "/Users/kearneymw/R/fml/README.md"   
-#> [9] "/Users/kearneymw/R/fml/README.Rmd"
+list_files(full = FALSE)
+#> [1] "_pkgdown.yml" "codecov.yml"  "DESCRIPTION"  "fml.Rproj"   
+#> [5] "LICENSE"      "LICENSE.md"   "NAMESPACE"    "README.md"   
+#> [9] "README.Rmd"
 ```
 
-  - **`list_dirs()`**: list only **directories** in a given directory
+  - **`list_dirs()`**: list **directories**
 
 <!-- end list -->
 
 ``` r
 ## list dirs in directory
-fml::list_dirs()
-#> [1] "/Users/kearneymw/R/fml/docs"    "/Users/kearneymw/R/fml/man"    
-#> [3] "/Users/kearneymw/R/fml/pkgdown" "/Users/kearneymw/R/fml/R"      
-#> [5] "/Users/kearneymw/R/fml/tests"
+list_dirs(full = FALSE)
+#> [1] "docs"    "man"     "pkgdown" "R"       "tests"
 ```
 
-  - **`list_paths()`**: list all **paths** in a given directory
+  - **`list_paths()`**: list all **paths**
 
 <!-- end list -->
 
 ``` r
-## list paths in directory
-fml::list_paths()
-#>  [1] "/Users/kearneymw/R/fml/_pkgdown.yml"
-#>  [2] "/Users/kearneymw/R/fml/codecov.yml" 
-#>  [3] "/Users/kearneymw/R/fml/DESCRIPTION" 
-#>  [4] "/Users/kearneymw/R/fml/docs"        
-#>  [5] "/Users/kearneymw/R/fml/fml.Rproj"   
-#>  [6] "/Users/kearneymw/R/fml/LICENSE"     
-#>  [7] "/Users/kearneymw/R/fml/LICENSE.md"  
-#>  [8] "/Users/kearneymw/R/fml/man"         
-#>  [9] "/Users/kearneymw/R/fml/NAMESPACE"   
-#> [10] "/Users/kearneymw/R/fml/pkgdown"     
-#> [11] "/Users/kearneymw/R/fml/R"           
-#> [12] "/Users/kearneymw/R/fml/README.md"   
-#> [13] "/Users/kearneymw/R/fml/README.Rmd"  
-#> [14] "/Users/kearneymw/R/fml/tests"
+## list files AND paths in directory
+list_paths(full = FALSE)
+#>  [1] "_pkgdown.yml" "codecov.yml"  "DESCRIPTION"  "docs"        
+#>  [5] "fml.Rproj"    "LICENSE"      "LICENSE.md"   "man"         
+#>  [9] "NAMESPACE"    "pkgdown"      "R"            "README.md"   
+#> [13] "README.Rmd"   "tests"
+```
+
+## Misc
+
+  - **`fp()`**: construct file path
+
+<!-- end list -->
+
+``` r
+## build this/that
+fp("this", "that")
+#> [1] "this/that"
+
+## pipe style
+"this" %FP% "that"
+#> [1] "this/that"
+```
+
+  - **`pe()`**: path expansion–converts to canonical form
+
+<!-- end list -->
+
+``` r
+## build this/that
+pe(fp(".", "this", "that"))
+#> [1] "./this/that"
+
+## pipe style
+"~" %FP% "this" %FP% "that" %FP% pe()
+#> [1] "~/this/that"
 ```

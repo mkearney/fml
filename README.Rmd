@@ -6,6 +6,7 @@ output: github_document
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, comment = "#>")
+library(fml)
 ```
 # fml <img src="man/figures/logo.png" width="160px" align="right" />
 
@@ -34,40 +35,82 @@ remotes::install_github("mkearney/fml")
 ```
 
 
-## Use
+## Find or search for files
 
-+ **`find_file()`**: find a file
++ **`find_file()`**: find a file (exact matches)
 
 ```{r}
 ## find the rtweet readme
-fml::find_file("rtweet", "README.Rmd")
+find_file("rtweet", "README.Rmd")
 ```
 
++ **`search_file()`**: search for files using [wildcard expansion](http://pubs.opengroup.org/onlinepubs/9699919799/functions/glob.html)
+   - **`*`**: match zero or more characters
+   - **`?`**: match a single character
+   - **`[`**: begin a character class or range
+
+```{r}
+## all caps files that don't end in 'md' (.Rmd/.md)
+search_file("[A-Z]*[!md]")
+
+## all .yml files
+Sys.glob("*.yml")
+
+## .yml files that start with a dot
+Sys.glob(".*.yml")
+```
+
+## Files in projects
 
 + **`here()`**: smart file paths within project
 
 ```{r}
 ## locate file in project
-fml::here("R", "fp.R")
+here("R", "fp.R")
 ```
 
-+ **`list_files()`**: list onlyl **files** in a given directory
+## List files/directories
+
++ **`list_files()`**: list **files**
 
 ```{r}
 ## list files in directory
-fml::list_files()
+list_files(full = FALSE)
 ```
 
-+ **`list_dirs()`**: list only **directories** in a given directory
++ **`list_dirs()`**: list **directories**
 
 ```{r}
 ## list dirs in directory
-fml::list_dirs()
+list_dirs(full = FALSE)
 ```
 
-+ **`list_paths()`**: list all **paths** in a given directory
++ **`list_paths()`**: list all **paths**
 
 ```{r}
-## list paths in directory
-fml::list_paths()
+## list files AND paths in directory
+list_paths(full = FALSE)
+```
+
+
+## Misc
+
++ **`fp()`**: construct file path
+
+```{r}
+## build this/that
+fp("this", "that")
+
+## pipe style
+"this" %FP% "that"
+```
+
++ **`pe()`**: path expansion–converts to canonical form
+
+```{r}
+## build this/that
+pe(fp(".", "this", "that"))
+
+## pipe style
+"~" %FP% "this" %FP% "that" %FP% pe()
 ```

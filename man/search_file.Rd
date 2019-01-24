@@ -4,10 +4,13 @@
 \alias{search_file}
 \title{Search file}
 \usage{
-search_file(...)
+search_file(pat, dir = get_path("."))
 }
 \arguments{
-\item{...Name}{to match (can include containing directory to narrow search)}
+\item{pat}{Name to match (can include containing directory to narrow search)}
+
+\item{dir}{Optional, directory from which to start/limit search (only
+subfolders will be searched)}
 }
 \value{
 Path if found. NULL if not.

@@ -2,9 +2,15 @@
 % Please edit documentation in R/fp.R
 \name{path_expand}
 \alias{path_expand}
+\alias{pe}
+\alias{get_path}
 \title{Expand path}
 \usage{
 path_expand(path = ".")
+
+pe(path = ".")
+
+get_path(path = ".")
 }
 \arguments{
 \item{path}{Character vector of paths to normalize}

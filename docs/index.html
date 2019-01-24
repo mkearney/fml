@@ -90,67 +90,112 @@
 <a class="sourceLine" id="cb1-6" title="6"><span class="co">## install from github</span></a>
 <a class="sourceLine" id="cb1-7" title="7">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"mkearney/fml"</span>)</a></code></pre></div>
 </div>
-<div id="use" class="section level2">
+<div id="find-or-search-for-files" class="section level2">
 <h2 class="hasAnchor">
-<a href="#use" class="anchor"></a>Use</h2>
+<a href="#find-or-search-for-files" class="anchor"></a>Find or search for files</h2>
 <ul>
 <li>
-<strong><code><a href="reference/find_file.html">find_file()</a></code></strong>: find a file</li>
+<strong><code><a href="reference/find_file.html">find_file()</a></code></strong>: find a file (exact matches)</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co">## find the rtweet readme</span></a>
-<a class="sourceLine" id="cb2-2" title="2">fml<span class="op">::</span><span class="kw"><a href="https://fml.mikewk.com/reference/find_file.html">find_file</a></span>(<span class="st">"rtweet"</span>, <span class="st">"README.Rmd"</span>)</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; [1] "/Users/kearneymw/R/rtweet/README.Rmd"</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="reference/find_file.html">find_file</a></span>(<span class="st">"rtweet"</span>, <span class="st">"README.Rmd"</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; [1] "/Users/mwk/R/rtweet/README.Rmd"</span></a></code></pre></div>
+<ul>
+<li>
+<strong><code><a href="reference/search_file.html">search_file()</a></code></strong>: search for files using <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/glob.html">wildcard expansion</a>
+<ul>
+<li>
+<strong><code>*</code></strong>: match zero or more characters</li>
+<li>
+<strong><code>?</code></strong>: match a single character</li>
+<li>
+<strong><code>[</code></strong>: begin a character class or range</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co">## all caps files that don't end in 'md' (.Rmd/.md)</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="reference/search_file.html">search_file</a></span>(<span class="st">"[A-Z]*[!md]"</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; [1] "/Users/mwk/R/fml/docs/CNAME"            </span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; [2] "/Users/mwk/R/fml/docs/LICENSE-text.html"</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; [3] "/Users/mwk/R/fml/docs/LICENSE.html"</span></a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">## all .yml files</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.glob">Sys.glob</a></span>(<span class="st">"*.yml"</span>)</a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt; [1] "_pkgdown.yml" "codecov.yml"</span></a>
+<a class="sourceLine" id="cb3-10" title="10"></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="co">## .yml files that start with a dot</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.glob">Sys.glob</a></span>(<span class="st">".*.yml"</span>)</a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt; [1] ".travis.yml"</span></a></code></pre></div>
+</div>
+<div id="files-in-projects" class="section level2">
+<h2 class="hasAnchor">
+<a href="#files-in-projects" class="anchor"></a>Files in projects</h2>
 <ul>
 <li>
 <strong><code><a href="reference/here.html">here()</a></code></strong>: smart file paths within project</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co">## locate file in project</span></a>
-<a class="sourceLine" id="cb3-2" title="2">fml<span class="op">::</span><span class="kw"><a href="https://fml.mikewk.com/reference/here.html">here</a></span>(<span class="st">"R"</span>, <span class="st">"fp.R"</span>)</a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; [1] "/Users/kearneymw/R/fml/R/fp.R"</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co">## locate file in project</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="reference/here.html">here</a></span>(<span class="st">"R"</span>, <span class="st">"fp.R"</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co">#&gt; [1] "/Users/mwk/R/fml/R/fp.R"</span></a></code></pre></div>
+</div>
+<div id="list-filesdirectories" class="section level2">
+<h2 class="hasAnchor">
+<a href="#list-filesdirectories" class="anchor"></a>List files/directories</h2>
 <ul>
 <li>
-<strong><code><a href="reference/list_files.html">list_files()</a></code></strong>: list onlyl <strong>files</strong> in a given directory</li>
+<strong><code><a href="reference/list_files.html">list_files()</a></code></strong>: list <strong>files</strong>
+</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co">## list files in directory</span></a>
-<a class="sourceLine" id="cb4-2" title="2">fml<span class="op">::</span><span class="kw"><a href="https://fml.mikewk.com/reference/list_files.html">list_files</a></span>()</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co">#&gt; [1] "/Users/kearneymw/R/fml/_pkgdown.yml"</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; [2] "/Users/kearneymw/R/fml/codecov.yml" </span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; [3] "/Users/kearneymw/R/fml/DESCRIPTION" </span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; [4] "/Users/kearneymw/R/fml/fml.Rproj"   </span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; [5] "/Users/kearneymw/R/fml/LICENSE"     </span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt; [6] "/Users/kearneymw/R/fml/LICENSE.md"  </span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; [7] "/Users/kearneymw/R/fml/NAMESPACE"   </span></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt; [8] "/Users/kearneymw/R/fml/README.md"   </span></a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt; [9] "/Users/kearneymw/R/fml/README.Rmd"</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co">## list files in directory</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="reference/list_files.html">list_files</a></span>(<span class="dt">full =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; [1] "_pkgdown.yml" "codecov.yml"  "DESCRIPTION"  "fml.Rproj"   </span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt; [5] "LICENSE"      "LICENSE.md"   "NAMESPACE"    "README.md"   </span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; [9] "README.Rmd"</span></a></code></pre></div>
 <ul>
 <li>
-<strong><code><a href="reference/list_dirs.html">list_dirs()</a></code></strong>: list only <strong>directories</strong> in a given directory</li>
+<strong><code><a href="reference/list_dirs.html">list_dirs()</a></code></strong>: list <strong>directories</strong>
+</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co">## list dirs in directory</span></a>
-<a class="sourceLine" id="cb5-2" title="2">fml<span class="op">::</span><span class="kw"><a href="https://fml.mikewk.com/reference/list_dirs.html">list_dirs</a></span>()</a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; [1] "/Users/kearneymw/R/fml/docs"    "/Users/kearneymw/R/fml/man"    </span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt; [3] "/Users/kearneymw/R/fml/pkgdown" "/Users/kearneymw/R/fml/R"      </span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; [5] "/Users/kearneymw/R/fml/tests"</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co">## list dirs in directory</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw"><a href="reference/list_dirs.html">list_dirs</a></span>(<span class="dt">full =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt; [1] "docs"    "man"     "pkgdown" "R"       "tests"</span></a></code></pre></div>
 <ul>
 <li>
-<strong><code><a href="reference/list_paths.html">list_paths()</a></code></strong>: list all <strong>paths</strong> in a given directory</li>
+<strong><code><a href="reference/list_paths.html">list_paths()</a></code></strong>: list all <strong>paths</strong>
+</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co">## list paths in directory</span></a>
-<a class="sourceLine" id="cb6-2" title="2">fml<span class="op">::</span><span class="kw"><a href="https://fml.mikewk.com/reference/list_paths.html">list_paths</a></span>()</a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt;  [1] "/Users/kearneymw/R/fml/_pkgdown.yml"</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt;  [2] "/Users/kearneymw/R/fml/codecov.yml" </span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt;  [3] "/Users/kearneymw/R/fml/DESCRIPTION" </span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt;  [4] "/Users/kearneymw/R/fml/docs"        </span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;  [5] "/Users/kearneymw/R/fml/fml.Rproj"   </span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt;  [6] "/Users/kearneymw/R/fml/LICENSE"     </span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt;  [7] "/Users/kearneymw/R/fml/LICENSE.md"  </span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt;  [8] "/Users/kearneymw/R/fml/man"         </span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt;  [9] "/Users/kearneymw/R/fml/NAMESPACE"   </span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt; [10] "/Users/kearneymw/R/fml/pkgdown"     </span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; [11] "/Users/kearneymw/R/fml/R"           </span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt; [12] "/Users/kearneymw/R/fml/README.md"   </span></a>
-<a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt; [13] "/Users/kearneymw/R/fml/README.Rmd"  </span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; [14] "/Users/kearneymw/R/fml/tests"</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co">## list files AND paths in directory</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="reference/list_paths.html">list_paths</a></span>(<span class="dt">full =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt;  [1] "_pkgdown.yml" "codecov.yml"  "DESCRIPTION"  "docs"        </span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt;  [5] "fml.Rproj"    "LICENSE"      "LICENSE.md"   "man"         </span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt;  [9] "NAMESPACE"    "pkgdown"      "R"            "README.md"   </span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; [13] "README.Rmd"   "tests"</span></a></code></pre></div>
+</div>
+<div id="misc" class="section level2">
+<h2 class="hasAnchor">
+<a href="#misc" class="anchor"></a>Misc</h2>
+<ul>
+<li>
+<strong><code><a href="reference/file_path.html">fp()</a></code></strong>: construct file path</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co">## build this/that</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw"><a href="reference/file_path.html">fp</a></span>(<span class="st">"this"</span>, <span class="st">"that"</span>)</a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt; [1] "this/that"</span></a>
+<a class="sourceLine" id="cb8-4" title="4"></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">## pipe style</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="st">"this"</span> <span class="op">%FP%</span><span class="st"> "that"</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; [1] "this/that"</span></a></code></pre></div>
+<ul>
+<li>
+<strong><code><a href="reference/path_expand.html">pe()</a></code></strong>: path expansion–converts to canonical form</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co">## build this/that</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="reference/path_expand.html">pe</a></span>(<span class="kw"><a href="reference/file_path.html">fp</a></span>(<span class="st">"."</span>, <span class="st">"this"</span>, <span class="st">"that"</span>))</a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; [1] "./this/that"</span></a>
+<a class="sourceLine" id="cb9-4" title="4"></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">## pipe style</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="st">"~"</span> <span class="op">%FP%</span><span class="st"> "this"</span> <span class="op">%FP%</span><span class="st"> "that"</span> <span class="op">%FP%</span><span class="st"> </span><span class="kw"><a href="reference/path_expand.html">pe</a></span>()</a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; [1] "~/this/that"</span></a></code></pre></div>
 </div>
 </div>
   </div>

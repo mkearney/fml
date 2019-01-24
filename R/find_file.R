@@ -43,7 +43,7 @@ good_dirs <- function() {
   w2 <- unlist(lapply(w1, list_dirs))
 
   ## (3) minus one
-  w0 <- auth_paths(normalizePath(".."))
+  w0 <- auth_paths(pe(".."))
 
   ## (4) - (11)
   fd <- fml_dirs()

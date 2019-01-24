@@ -3,29 +3,32 @@
 #' Builds a file path
 #'
 #' @param ... Names to path
-#' @return String of path name
+#' @return Constructed/pasted together path name
 #' @export
-fp <- function(...) {
-  file.path(...)
+file_path <- function(...) {
+  UseMethod("file_path")
 }
 
-#' @rdname fp
+#' @export
+file_path.default <- function(...) {
+  dots <- list(...)
+  dots <- dots[lengths(dots) > 0]
+  if (length(dots) == 0) return(character())
+  do.call(base::file.path, dots, quote = FALSE, envir = environment())
+}
+
+#' @rdname file_path
 #' @export
 #' @param lhs Left hand side
 #' @param rhs Right hand side
-`%FP%` <- function(lhs, rhs) {
+`%FP%` <- function(lhs = NULL, rhs = NULL) {
   fp(lhs, rhs)
 }
 
-#' @rdname fp
+#' @rdname file_path
 #' @export
-#' @inheritParams fp
-path_path <- fp
-
-#' @rdname fp
-#' @export
-#' @inheritParams fp
-file_path <- fp
+#' @inheritParams file_path
+fp <- file_path
 
 #' Expand path
 #'
@@ -35,9 +38,29 @@ file_path <- fp
 #' @return Full/expanded canonical paths
 #' @export
 path_expand <- function(path = ".") {
+  UseMethod("path_expand")
+}
+
+#' @export
+path_expand.NULL <- function(path = ".") {
+  character()
+}
+
+#' @export
+path_expand.default <- function(path = ".") {
   if (identical(path, "")) path <- "."
   normalizePath(path, mustWork = FALSE)
 }
+
+#' @rdname path_expand
+#' @export
+#' @inheritParams path_expand
+pe <- path_expand
+
+#' @rdname path_expand
+#' @export
+#' @inheritParams path_expand
+get_path <- path_expand
 
 #' Directory name
 #'
