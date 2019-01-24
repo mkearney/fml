@@ -38,8 +38,7 @@ rdir <- function() {
 
 auth_paths <- function(...) {
   paths <- fp(...)
-  paths <- file_info(paths)
-  paths$path[paths$write & paths$read]
+  names(read_access(paths)[TRUE])
 }
 
 good_dirs <- function() {
@@ -103,6 +102,8 @@ fml_dirs <- function() {
   d
 }
 
-fpf <- function(d) function(path) {
-  if (file_exists(d, path)) return(fp(d, path)) else NULL
+fpf <- function(d) {
+  function(path) {
+    if (file_exists(fp(d, path))) return(fp(d, path)) else NULL
+  }
 }

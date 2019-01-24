@@ -2,9 +2,18 @@
 % Please edit documentation in R/fp.R
 \name{fp}
 \alias{fp}
+\alias{\%FP\%}
+\alias{path_path}
+\alias{file_path}
 \title{File path}
 \usage{
 fp(...)
+
+... \%FP\% NA
+
+path_path(...)
+
+file_path(...)
 }
 \arguments{
 \item{...}{Names to path}

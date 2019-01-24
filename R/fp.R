@@ -7,8 +7,16 @@
 #' @export
 fp <- function(...) file.path(...)
 
+#' @rdname fp
+#' @export
+`%FP%` <- fp
+
+#' @rdname fp
+#' @export
 path_path <- fp
 
+#' @rdname fp
+#' @export
 file_path <- fp
 
 #' Expand path
