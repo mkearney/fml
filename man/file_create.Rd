@@ -29,8 +29,6 @@ file (directories created as necessary). This defaults to FALSE.}
 \item{to}{New/copy name}
 
 \item{overwrite}{Logical indicating whether to overwrite}
-
-\item{recursive}{Logical indicating whether action should be recursive}
 }
 \value{
 Silently returns logical indicating success.

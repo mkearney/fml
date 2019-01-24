@@ -9,7 +9,7 @@
 \usage{
 fp(...)
 
-... \%FP\% NA
+lhs \%FP\% rhs
 
 path_path(...)
 
@@ -17,6 +17,10 @@ file_path(...)
 }
 \arguments{
 \item{...}{Names to path}
+
+\item{lhs}{Left hand side}
+
+\item{rhs}{Right hand side}
 }
 \value{
 String of path name

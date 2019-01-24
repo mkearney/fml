@@ -9,7 +9,7 @@
 #' @return Silently returns logical indicating success.
 #' @export
 dir_create <- function(path, recursive = FALSE) {
-  dir.create(path, recursive = FALSE)
+  dir.create(path, recursive = recursive)
 }
 
 #' Temporary file
@@ -54,7 +54,7 @@ dir_tmp <- function() {
 #' @export
 file_create <- function(path, recursive = FALSE) {
   if (recursive && !dir_exists(dir_name(path))) {
-    dir_create(dir_name(path), recursive = TRUE)
+    dir_create(dir_name(path), recursive = recursive)
   }
   file.create(path)
 }
@@ -67,7 +67,6 @@ file_remove <- function(path) {
 }
 
 #' @inheritParams dir_create
-#' @param recursive Logical indicating whether to recursively remove files.
 #' @rdname dir_create
 #' @export
 dir_remove <- function(path, recursive = FALSE) {
@@ -78,8 +77,8 @@ dir_remove <- function(path, recursive = FALSE) {
 #'
 #' Rename directory
 #'
-#' @param from Name of directory to rename
-#' @param to New directory name
+#' @param from Name of directory to rename/copy
+#' @param to New directory
 #' @return Logical indicating whether success
 #' @rdname dir_create
 #' @export
@@ -95,9 +94,7 @@ dir_rename <- function(from, to) {
 #'
 #' Copy directory
 #'
-#' @param from Name of directory to copy
-#' @param to New directory name
-#' @return Logical indicating whether success
+#' @inheritParams dir_rename
 #' @rdname dir_create
 #' @export
 dir_copy <- function(from, to) {
@@ -127,7 +124,6 @@ file_rename <- function(from, to) file.rename(from, to)
 #'
 #' @inheritParams file_rename
 #' @param overwrite Logical indicating whether to overwrite
-#' @param recursive Logical indicating whether action should be recursive
 #' @rdname file_create
 #' @export
 file_copy <- function(from, to, overwrite = FALSE, recursive = FALSE) {

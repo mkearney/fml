@@ -28,7 +28,7 @@ dir_exists <- function(path) {
 write_access <- function(path) {
   x <- ifelse(file_exists(path), path, dir_name(path))
   i <- file.access(x, 2)
-  setNames(i == 0, path)
+  set_names(i == 0, path)
 }
 
 #' Check for read access
@@ -39,7 +39,7 @@ write_access <- function(path) {
 read_access <- function(path) {
   x <- ifelse(file_exists(path), path, dir_name(path))
   i <- file.access(x, 4)
-  setNames(i == 0, path)
+  set_names(i == 0, path)
 }
 
 #' Symlink exists
@@ -50,4 +50,11 @@ read_access <- function(path) {
 #' @export
 symlink_exists <- function(path) {
   isTRUE(nzchar(Sys.readlink(path), keepNA = TRUE))
+}
+
+
+
+set_names <- function (object = nm, nm) {
+  names(object) <- nm
+  object
 }

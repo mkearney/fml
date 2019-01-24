@@ -21,20 +21,12 @@ dir_copy(from, to)
 \item{recursive}{Logical indicating whether to recursively create new
 directory. This defaults to FALSE.}
 
-\item{from}{Name of directory to rename}
+\item{from}{Name of directory to rename/copy}
 
-\item{to}{New directory name}
-
-\item{recursive}{Logical indicating whether to recursively remove files.}
-
-\item{from}{Name of directory to copy}
-
-\item{to}{New directory name}
+\item{to}{New directory}
 }
 \value{
 Silently returns logical indicating success.
-
-Logical indicating whether success
 
 Logical indicating whether success
 }

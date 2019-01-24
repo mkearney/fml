@@ -11,8 +11,11 @@ fp <- function(...) {
 
 #' @rdname fp
 #' @export
-#' @inheritParams fp
-`%FP%` <- fp
+#' @param lhs Left hand side
+#' @param rhs Right hand side
+`%FP%` <- function(lhs, rhs) {
+  fp(lhs, rhs)
+}
 
 #' @rdname fp
 #' @export
