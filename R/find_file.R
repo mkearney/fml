@@ -27,15 +27,6 @@ find_file.default <- function(...) {
   path
 }
 
-rdir <- function() {
-  if (!identical("", Sys.getenv("FML_R_DIR"))) {
-    return(Sys.getenv("FML_R_DIR"))
-  }
-  r <- tfse:::r_dir()
-  tfse::set_renv(FML_R_DIR = r)
-  r
-}
-
 auth_paths <- function(...) {
   paths <- fp(...)
   names(read_access(paths)[TRUE])
@@ -67,14 +58,11 @@ fml_dirs <- function() {
 
   ## if it exists, read and return the dir vector
   if (!identical("", d)) {
-    return(tfse::read_RDS(d))
+    return(readRDS(d))
   }
 
-  ## R dir
-  rd <- rdir()
-
   ## home directory
-  hm <- tfse::home()
+  hm <- .home()
 
   ## home directory + 1
   h1 <- grep("\\bLibrary\\b", auth_paths(list_dirs(hm)),
@@ -90,13 +78,13 @@ fml_dirs <- function() {
   h4 <- auth_paths(unlist(lapply(h3, list_dirs)))
 
   ## combine and filter dups
-  d <- unique(c(rd, hm, h1, h2, h3, h4))
+  d <- unique(c(hm, h1, h2, h3, h4))
 
   ## save as .rds
-  tfse::save_RDS(d, fp("~", ".fml_dirs"))
+  saveRDS(d, fp("~", ".fml_dirs"))
 
   ## set path to .rds file as Renviron var
-  tfse::set_renv(FML_DIR_PAT = fp("~", ".fml_dirs"))
+  set_renv(FML_DIR_PAT = fp("~", ".fml_dirs"))
 
   ## return dirs
   d
@@ -106,4 +94,129 @@ fpf <- function(d) {
   function(path) {
     if (file_exists(fp(d, path))) return(fp(d, path)) else NULL
   }
+}
+
+
+
+#' .Renviron file
+#'
+#' Gets path to .Renviron file
+#'
+#' @return Returns path to .Renviron file
+#' @details Checks local directory first and then checks home directory
+#' @export
+.Renviron <- function() {
+  if (file_exists(".Renviron")) {
+    ".Renviron"
+  } else {
+    path_expand(fp(.home(), ".Renviron"))
+  }
+}
+
+#' Home directory
+#'
+#' Gets user's home directory
+#'
+#' @return Returns system/user's default home directory
+#' @details Looks for "HOME" environment variable and/or normalizes the tilde
+#'   path
+#' @export
+.home <- function() {
+  if (!identical(Sys.getenv("HOME"), "")) {
+    fp(Sys.getenv("HOME"))
+  } else {
+    path_expand("~")
+  }
+}
+
+
+is_named <- function(x) !is.null(names(x))
+
+are_named <- function(x) is_named(x) && !"" %in% names(x)
+
+has_name_ <- function(x, name) isTRUE(name %in% names(x))
+
+define_args <- function(args, ...) {
+  dots <- list(...)
+  nms <- names(dots)
+  for (i in nms) {
+    if (!has_name_(args, i)) {
+      args[[i]] <- dots[[i]]
+    }
+  }
+  args
+}
+
+append_lines <- function(x, ...) {
+  args <- define_args(
+    c(x, list(...)),
+    append = TRUE,
+    fill = TRUE
+  )
+  do.call("cat", args)
+}
+
+is_incomplete <- function(x) {
+  con <- file(x)
+  x <- tryCatch(readLines(con), warning = function(w) return(TRUE))
+  close(con)
+  ifelse(isTRUE(x), TRUE, FALSE)
+}
+
+clean_renv <- function(var) {
+  x <- readlines(.Renviron())
+  x <- grep(sprintf("^%s=", var), x, invert = TRUE, value = TRUE)
+  writeLines(x, .Renviron())
+}
+
+check_renv <- function(var = NULL) {
+  if (!file.exists(.Renviron())) return(invisible())
+  if (is_incomplete(.Renviron())) {
+    append_lines("", file = .Renviron())
+  }
+  if (!is.null(var)) {
+    clean_renv(var)
+  }
+  invisible()
+}
+
+set_renv <- function(...) {
+  dots <- list(...)
+  stopifnot(are_named(dots))
+  vars <- names(dots)
+  x <- paste0(names(dots), "=", dots)
+  x <- paste(x, collapse = "\n")
+  for (var in vars) {
+    check_renv(var)
+  }
+  append_lines(x, file = .Renviron())
+  readRenviron(.Renviron())
+}
+
+
+readlines <- function(x, ...) {
+  dots <- list(...)
+  if (!"encoding" %in% names(dots)) {
+    dots$encoding <- "UTF-8"
+  }
+  if (!"skipNul" %in% names(dots)) {
+    dots$skipNul <- TRUE
+  }
+  if (!"warn" %in% names(dots)) {
+    dots$warn <- FALSE
+  }
+  if (is_url(x)) {
+    con <- url(x, encoding = dots$encoding)
+  }
+  else {
+    con <- file(x, encoding = dots$encoding)
+  }
+  on.exit(close(con), add = TRUE)
+  dots$con <- con
+  do.call(base::readLines, dots, quote = FALSE)
+}
+
+
+is_url <- function(x) {
+  is.character(x) && length(x) == 1 && grepl("^http", x)
 }

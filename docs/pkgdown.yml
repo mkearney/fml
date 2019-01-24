@@ -1,0 +1,8 @@
+pandoc: '2.5'
+pkgdown: 1.3.0
+pkgdown_sha: ~
+articles: []
+urls:
+  reference: https://fml.mikewk.com/reference
+  article: https://fml.mikewk.com/articles
+

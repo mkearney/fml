@@ -105,7 +105,15 @@ dir_copy <- function(from, to) {
   if (!dir_exists(dir_name(to))) {
     stop("Enclosing 'to' directory does not exist", call. = FALSE)
   }
-  file.copy(from, to, overwrite = FALSE, recursive = TRUE)
+  o <- file.copy(from, to, overwrite = FALSE,
+    recursive = !dir_exists(dir_name(to)))
+  if (!o) return(o)
+  ## empty dir copies as file, so rm file and create new empty dir
+  if (!dir_exists(to) && file_exists(to)) {
+    file_remove(to)
+    dir_create(to)
+  }
+  o
 }
 
 #' File rename

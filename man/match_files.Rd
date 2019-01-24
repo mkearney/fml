@@ -8,7 +8,7 @@ match_files(pat)
 }
 \arguments{
 \item{pat}{File pattern on which to match where * means 0 or more, ? means
-once, and \[ indicates the start of a string.}
+once, and [ indicates the start of a string.}
 }
 \value{
 Matching files

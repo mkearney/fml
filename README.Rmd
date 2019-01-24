@@ -13,11 +13,11 @@ knitr::opts_chunk$set(echo = TRUE, collapse = TRUE, comment = "#>")
 [![CRAN status](https://www.r-pkg.org/badges/version/fml)](https://cran.r-project.org/package=fml)
 [![Coverage Status](https://codecov.io/gh/mkearney/fml/branch/master/graph/badge.svg)](https://codecov.io/gh/mkearney/fml?branch=master)
 
-<!--#![Downloads](https://cranlogs.r-pkg.org/badges/fml)
-#![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/fml)-->
+![Downloads](https://cranlogs.r-pkg.org/badges/fml)
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/fml)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-**F**ile **M**anagement **L**ocator package
+**F**ile **M**anagement and **L**ocator tools
 
 ## Installation
 
@@ -36,13 +36,38 @@ remotes::install_github("mkearney/fml")
 
 ## Use
 
-Find a file
++ **`find_file()`**: find a file
 
 ```{r}
 ## find the rtweet readme
 fml::find_file("rtweet", "README.Rmd")
+```
 
+
++ **`here()`**: smart file paths within project
+
+```{r}
 ## locate file in project
 fml::here("R", "fp.R")
 ```
 
++ **`list_files()`**: list onlyl **files** in a given directory
+
+```{r}
+## list files in directory
+fml::list_files()
+```
+
++ **`list_dirs()`**: list only **directories** in a given directory
+
+```{r}
+## list dirs in directory
+fml::list_dirs()
+```
+
++ **`list_paths()`**: list all **paths** in a given directory
+
+```{r}
+## list paths in directory
+fml::list_paths()
+```

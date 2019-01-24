@@ -43,7 +43,7 @@ list_dirs.default <- function(path = ".",
                               invert = FALSE) {
   dirs <- list.dirs(path, recursive = recursive, full.names = FALSE)
   if (!all) {
-    dirs <- grep("^//?\\.[^/.]+$", dirs, invert = TRUE, value = TRUE)
+    dirs <- grep("^\\.[^/]+$", dirs, invert = TRUE, value = TRUE)
   }
   if (!is.null(pattern)) {
     dirs <- grep(pattern, dirs, invert = invert, value = TRUE,
