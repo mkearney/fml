@@ -15,6 +15,7 @@ LazyData: yes
 RoxygenNote: 6.1.1
 Imports: 
     tfse
+Remotes: mkearney/tfse
 Suggests: 
     testthat,
     covr
