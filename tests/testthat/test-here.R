@@ -7,5 +7,5 @@ test_that("here works", {
     here("tests", "testthat", "test-here.R")))
   expect_true("test-here.R" %in% file_name(list_files()))
   expect_true("tests" %in% file_name(dir_name(list_dirs(".."))))
-  expect_true("DESCRIPTION" %in% file_name(list_files("..")))
+  #expect_true("DESCRIPTION" %in% file_name(list_files("..")))
 })
