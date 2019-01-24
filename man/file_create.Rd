@@ -5,6 +5,7 @@
 \alias{file_remove}
 \alias{file_rename}
 \alias{file_copy}
+\alias{file_exists}
 \alias{symlink_exists}
 \title{Create file}
 \usage{
@@ -15,6 +16,8 @@ file_remove(path)
 file_rename(from, to)
 
 file_copy(from, to, overwrite = FALSE, recursive = FALSE)
+
+file_exists(path)
 
 symlink_exists(path)
 }
@@ -32,6 +35,8 @@ file (directories created as necessary). This defaults to FALSE.}
 }
 \value{
 Silently returns logical indicating success.
+
+Logical value with TRUE indicating it exists
 }
 \description{
 Creates a file
@@ -40,5 +45,13 @@ Rename file
 
 copy file
 
+Logical test of whether file exists
+
 Check whether a symlink exists
 }
+\seealso{
+Other exists: \code{\link{dir_create}}
+
+Other exists: \code{\link{dir_create}}
+}
+\concept{exists}

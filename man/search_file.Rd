@@ -18,3 +18,7 @@ Path if found. NULL if not.
 \description{
 Searches for matching file names in common spots and returns full path
 }
+\seealso{
+Other locate: \code{\link{find_file}}, \code{\link{here}}
+}
+\concept{locate}

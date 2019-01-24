@@ -6,6 +6,7 @@
 #' @param ... Parts comprising a single path
 #' @return Returns the supplied file name appended onto the root directory
 #' @details Looks for a .Rproj or .here file and then appends the supplied file
+#' @family locate
 #' @export
 here <- function(...) {
   UseMethod("here")

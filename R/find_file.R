@@ -4,6 +4,7 @@
 #'
 #' @param ... Name of file (can include containing directory to narrow search)
 #' @return Path if found. NULL if not.
+#' @family locate
 #' @export
 find_file <- function(...) {
   UseMethod("find_file")

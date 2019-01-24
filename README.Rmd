@@ -18,7 +18,7 @@ library(fml)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/fml)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-**F**ile **M**anagement and **L**ocator tools
+**F**ile **M**anagement and **L**ocation tools
 
 ## Installation
 
@@ -50,14 +50,14 @@ find_file("rtweet", "README.Rmd")
    - **`[`**: begin a character class or range
 
 ```{r}
-## all caps files that don't end in 'md' (.Rmd/.md)
-search_file("[A-Z]*[!md]")
+## starts with capital letter and doesn't end with md/html
+search_file("[A-Z]*[!md|html]")
 
-## all .yml files
-Sys.glob("*.yml")
+## all .yml files not in docs/
+search_file("[!docs]*.yml")
 
 ## .yml files that start with a dot
-Sys.glob(".*.yml")
+search_file(".*.yml")
 ```
 
 ## Files in projects

@@ -17,6 +17,7 @@
 #' @param invert Logical indicating whether to invert (return those that DO NOT
 #'   match) regex matching results–defaults to FALSE.
 #' @return A character vector of directories
+#' @family list_paths
 #' @examples
 #'
 #' ## list files in working directory
@@ -42,7 +43,6 @@ list_dirs.default <- function(path = ".",
                               ignore.case = FALSE,
                               invert = FALSE) {
   dirs <- list.dirs(path, recursive = recursive, full.names = FALSE)
-  dirs <- dirs[dirs != ""]
   if (!all) {
     dirs <- grep("^\\.|/\\.", dirs, invert = TRUE, value = TRUE)
   }

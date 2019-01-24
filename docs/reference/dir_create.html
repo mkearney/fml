@@ -36,7 +36,8 @@
 
 <meta property="og:description" content="Creates a directory
 Rename directory
-Copy directory" />
+Copy directory
+Logical test of whether directory exists" />
 
 <meta property="og:image" content="https://fml.mikewk.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -115,6 +116,7 @@ Copy directory" />
     <p>Creates a directory</p>
 <p>Rename directory</p>
 <p>Copy directory</p>
+<p>Logical test of whether directory exists</p>
     
     </div>
 
@@ -124,7 +126,9 @@ Copy directory" />
 
 <span class='fu'>dir_rename</span>(<span class='no'>from</span>, <span class='no'>to</span>)
 
-<span class='fu'>dir_copy</span>(<span class='no'>from</span>, <span class='no'>to</span>)</pre>
+<span class='fu'>dir_copy</span>(<span class='no'>from</span>, <span class='no'>to</span>)
+
+<span class='fu'>dir_exists</span>(<span class='no'>path</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,6 +156,11 @@ directory. This defaults to FALSE.</p></td>
 
     <p>Silently returns logical indicating success.</p>
 <p>Logical indicating whether success</p>
+<p>Logical value with TRUE indicating it exists</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other exists: <code><a href='file_create.html'>file_create</a></code></p></div>
     
 
   </div>
@@ -161,6 +170,8 @@ directory. This defaults to FALSE.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

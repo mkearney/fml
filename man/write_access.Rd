@@ -15,3 +15,7 @@ Logical indicating wether write permission exists
 \description{
 Check for write access
 }
+\seealso{
+Other permissions: \code{\link{read_access}}
+}
+\concept{permissions}

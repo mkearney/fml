@@ -18,3 +18,8 @@ Build a path from an R project root
 \details{
 Looks for a .Rproj or .here file and then appends the supplied file
 }
+\seealso{
+Other locate: \code{\link{find_file}},
+  \code{\link{search_file}}
+}
+\concept{locate}

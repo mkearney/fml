@@ -7,9 +7,6 @@
     <loc>https://fml.mikewk.com/reference/dir_create.html</loc>
   </url>
   <url>
-    <loc>https://fml.mikewk.com/reference/dir_exists.html</loc>
-  </url>
-  <url>
     <loc>https://fml.mikewk.com/reference/dir_name.html</loc>
   </url>
   <url>
@@ -23,9 +20,6 @@
   </url>
   <url>
     <loc>https://fml.mikewk.com/reference/file_create.html</loc>
-  </url>
-  <url>
-    <loc>https://fml.mikewk.com/reference/file_exists.html</loc>
   </url>
   <url>
     <loc>https://fml.mikewk.com/reference/file_info.html</loc>

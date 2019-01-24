@@ -17,6 +17,7 @@
 #' @param invert Logical indicating whether to invert (return those that DO NOT
 #'   match) pattern matching results–defaults to FALSE.
 #' @return A character vector of paths.
+#' @family list_paths
 #' @examples
 #'
 #' ## list paths in working directory

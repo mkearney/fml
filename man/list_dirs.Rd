@@ -41,3 +41,8 @@ list.dirs() only with better defaults and behaviors.
 list_files()
 
 }
+\seealso{
+Other list_paths: \code{\link{list_files}},
+  \code{\link{list_paths}}
+}
+\concept{list_paths}

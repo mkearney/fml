@@ -6,6 +6,7 @@
 #' @param dir Optional, directory from which to start/limit search (only
 #'   subfolders will be searched)
 #' @return Path if found. NULL if not.
+#' @family locate
 #' @export
 search_file <- function(pat, dir = get_path(".")) {
   UseMethod("search_file")

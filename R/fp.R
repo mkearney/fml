@@ -62,24 +62,6 @@ pe <- path_expand
 #' @inheritParams path_expand
 get_path <- path_expand
 
-#' Directory name
-#'
-#' Returns directory name from a given path
-#'
-#' @param path String representing path
-#' @return Name of containing
-#' @export
-dir_name <- function(path) dirname(path)
-
-#' File name
-#'
-#' Returns file name from a given path
-#'
-#' @param path Path
-#' @return Name of file
-#' @export
-file_name <- function(path) basename(path)
-
 #' Package file
 #'
 #' Construct path to an R package file
@@ -91,4 +73,3 @@ file_name <- function(path) basename(path)
 package_file <- function(path, package = "base") {
   system.file(path, package = package)
 }
-

@@ -10,8 +10,14 @@ file_info(...)
 \item{...}{Path names}
 }
 \value{
-A data frame with path, size, isdir, permission, and timestamp variables
+A data frame with path, size, isdir, permission, and timestamp
+variables
 }
 \description{
 Returns a data frame of file information
 }
+\seealso{
+Other file_info: \code{\link{dir_name}},
+  \code{\link{file_name}}
+}
+\concept{file_info}

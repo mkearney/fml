@@ -2,8 +2,10 @@
 #'
 #' Logical test of whether file exists
 #'
-#' @param path Path
+#' @inheritParams file_create
 #' @return Logical value with TRUE indicating it exists
+#' @rdname file_create
+#' @family exists
 #' @export
 file_exists <- function(path) {
   file.exists(path)
@@ -13,8 +15,10 @@ file_exists <- function(path) {
 #'
 #' Logical test of whether directory exists
 #'
-#' @param path Path
+#' @inheritParams dir_create
 #' @return Logical value with TRUE indicating it exists
+#' @rdname dir_create
+#' @family exists
 #' @export
 dir_exists <- function(path) {
   dir.exists(path)
@@ -24,6 +28,7 @@ dir_exists <- function(path) {
 #'
 #' @param path Path
 #' @return Logical indicating wether write permission exists
+#' @family permissions
 #' @export
 write_access <- function(path) {
   x <- ifelse(file_exists(path), path, dir_name(path))
@@ -35,6 +40,7 @@ write_access <- function(path) {
 #'
 #' @param path Path
 #' @return Logical indicating wether read permission exists
+#' @family permissions
 #' @export
 read_access <- function(path) {
   x <- ifelse(file_exists(path), path, dir_name(path))
@@ -47,6 +53,8 @@ read_access <- function(path) {
 #' Check whether a symlink exists
 #'
 #' @rdname file_create
+#' @inheritParams file_create
+#' @family exists
 #' @export
 symlink_exists <- function(path) {
   isTRUE(nzchar(Sys.readlink(path), keepNA = TRUE))

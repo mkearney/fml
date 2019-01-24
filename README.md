@@ -14,7 +14,7 @@ Status](https://codecov.io/gh/mkearney/fml/branch/master/graph/badge.svg)](https
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/fml)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-**F**ile **M**anagement and **L**ocator tools
+**F**ile **M**anagement and **L**ocation tools
 
 ## Installation
 
@@ -51,19 +51,18 @@ find_file("rtweet", "README.Rmd")
 <!-- end list -->
 
 ``` r
-## all caps files that don't end in 'md' (.Rmd/.md)
-search_file("[A-Z]*[!md]")
-#> [1] "/Users/mwk/R/fml/docs/CNAME"            
-#> [2] "/Users/mwk/R/fml/docs/LICENSE-text.html"
-#> [3] "/Users/mwk/R/fml/docs/LICENSE.html"
+## starts with capital letter and doesn't end with md/html
+search_file("[A-Z]*[!md|html]")
+#> [1] "/Users/mwk/R/fml/DESCRIPTION" "/Users/mwk/R/fml/LICENSE"    
+#> [3] "/Users/mwk/R/fml/NAMESPACE"   "/Users/mwk/R/fml/docs/CNAME"
 
-## all .yml files
-Sys.glob("*.yml")
-#> [1] "_pkgdown.yml" "codecov.yml"
+## all .yml files not in docs/
+search_file("[!docs]*.yml")
+#> [1] "/Users/mwk/R/fml/_pkgdown.yml"     "/Users/mwk/R/fml/docs/pkgdown.yml"
 
 ## .yml files that start with a dot
-Sys.glob(".*.yml")
-#> [1] ".travis.yml"
+search_file(".*.yml")
+#> [1] "/Users/mwk/R/fml/.travis.yml"
 ```
 
 ## Files in projects

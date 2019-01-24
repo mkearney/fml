@@ -37,6 +37,7 @@
 <meta property="og:description" content="Creates a file
 Rename file
 copy file
+Logical test of whether file exists
 Check whether a symlink exists" />
 
 <meta property="og:image" content="https://fml.mikewk.com/logo.png" />
@@ -116,6 +117,7 @@ Check whether a symlink exists" />
     <p>Creates a file</p>
 <p>Rename file</p>
 <p>copy file</p>
+<p>Logical test of whether file exists</p>
 <p>Check whether a symlink exists</p>
     
     </div>
@@ -127,6 +129,8 @@ Check whether a symlink exists" />
 <span class='fu'>file_rename</span>(<span class='no'>from</span>, <span class='no'>to</span>)
 
 <span class='fu'>file_copy</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>file_exists</span>(<span class='no'>path</span>)
 
 <span class='fu'>symlink_exists</span>(<span class='no'>path</span>)</pre>
     
@@ -159,6 +163,12 @@ file (directories created as necessary). This defaults to FALSE.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Silently returns logical indicating success.</p>
+<p>Logical value with TRUE indicating it exists</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other exists: <code><a href='dir_create.html'>dir_create</a></code></p>
+<p>Other exists: <code><a href='dir_create.html'>dir_create</a></code></p></div>
     
 
   </div>
@@ -168,6 +178,8 @@ file (directories created as necessary). This defaults to FALSE.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>
