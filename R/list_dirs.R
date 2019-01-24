@@ -50,6 +50,7 @@ list_dirs.default <- function(path = ".",
       ignore.case = ignore.case)
   }
   if (full) {
+    path <- path_expand(path)
     dirs <- normalizePath(fp(path, dirs), mustWork = FALSE)
   }
   dirs

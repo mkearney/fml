@@ -5,7 +5,9 @@
 #' @param ... Names to path
 #' @return String of path name
 #' @export
-fp <- function(...) file.path(...)
+fp <- function(...) {
+  file.path(...)
+}
 
 #' @rdname fp
 #' @export
@@ -26,7 +28,10 @@ file_path <- fp
 #' @param path Character vector of paths to normalize
 #' @return Full/expanded canonical paths
 #' @export
-path_expand <- function(path) normalizePath(path, mustWork = FALSE)
+path_expand <- function(path = ".") {
+  if (identical(path, "")) path <- "."
+  normalizePath(path, mustWork = FALSE)
+}
 
 #' Directory name
 #'

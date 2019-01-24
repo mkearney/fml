@@ -4,7 +4,7 @@
 \alias{path_expand}
 \title{Expand path}
 \usage{
-path_expand(path)
+path_expand(path = ".")
 }
 \arguments{
 \item{path}{Character vector of paths to normalize}

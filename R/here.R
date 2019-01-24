@@ -8,14 +8,18 @@
 #' @details Looks for a .Rproj or .here file and then appends the supplied file
 #' @export
 here <- function(...) {
-  path <- path_expand(".")
+  fp(get_root(), ...)
+}
+
+get_root <- function(path = path_expand()) {
+  og <- path
   while (!is_rproj(path) && !is_here(path)) {
-    path <- dirname(path)
     if (path %in% c("/", path_expand("~"))) {
-      stop("Cannot find project root", call. = FALSE)
+      return(og)
     }
+    path <- dirname(path)
   }
-  fp(path, ...)
+  path
 }
 
 is_rproj <- function(path = ".") {
