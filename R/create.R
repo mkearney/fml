@@ -69,8 +69,8 @@ file_remove <- function(path) {
 #' @inheritParams dir_create
 #' @rdname dir_create
 #' @export
-dir_remove <- function(path, recursive = FALSE) {
-  unlink(path, recursive = recursive)
+dir_remove <- function(path) {
+  unlink(path, recursive = TRUE)
 }
 
 #' Directory rename

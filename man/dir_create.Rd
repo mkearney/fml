@@ -9,7 +9,7 @@
 \usage{
 dir_create(path, recursive = FALSE)
 
-dir_remove(path, recursive = FALSE)
+dir_remove(path)
 
 dir_rename(from, to)
 
