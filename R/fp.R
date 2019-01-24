@@ -11,14 +11,17 @@ fp <- function(...) {
 
 #' @rdname fp
 #' @export
+#' @inheritParams fp
 `%FP%` <- fp
 
 #' @rdname fp
 #' @export
+#' @inheritParams fp
 path_path <- fp
 
 #' @rdname fp
 #' @export
+#' @inheritParams fp
 file_path <- fp
 
 #' Expand path
