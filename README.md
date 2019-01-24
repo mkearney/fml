@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# fml
+# fml <img src="man/figures/logo.png" width="160px" align="right" />
 
 [![Build
 status](https://travis-ci.org/mkearney/fml.svg?branch=master)](https://travis-ci.org/mkearney/fml)

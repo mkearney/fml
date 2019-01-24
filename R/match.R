@@ -7,4 +7,6 @@
 #'   once, and \[ indicates the start of a string.
 #' @return Matching files
 #' @export
-match_files <- function(pat) Sys.glob(pat)
+match_files <- function(pat) {
+  fp(path_expand("."), Sys.glob(pat))
+}
