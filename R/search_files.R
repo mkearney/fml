@@ -26,7 +26,10 @@ search_file.default <- function(...) {
   }
 
   ## return (NULL if not found)
-  unlist(path, use.names = FALSE)
+  path <- unlist(path, use.names = FALSE)
+
+  if (length(path) == 0) return(NULL)
+  path
 }
 
 
@@ -36,8 +39,12 @@ spf <- function(d) {
   function(re) {
     owd <- getwd()
     on.exit(setwd(owd), add = TRUE)
-    setwd(d)
-    if (any_match_files(re)) return(match_files(re)) else NULL
+    o <- tryCatch(
+      setwd(d),
+      error = function(e) FALSE
+    )
+    if (identical(o, FALSE)) return(NULL)
+    match_files(re)
   }
 }
 
